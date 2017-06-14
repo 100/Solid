@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
-from math import exp
-from scipy.stats import bernoulli
 from copy import deepcopy
+from math import exp
+from random import random
 
 
 class SimulatedAnnealing:
@@ -86,7 +86,7 @@ class SimulatedAnnealing:
 
     def _accept_neighbor(self, neighbor):
         p = exp(self._energy(self.current_state) - self._energy(neighbor)) / self.current_temp
-        return True if p >= 1 else bernoulli.rvs(p, size=1)[0] == 1
+        return True if p >= 1 else p >= random()
 
     def anneal(self, verbose=True):
         self._clear()
