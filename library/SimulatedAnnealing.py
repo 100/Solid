@@ -37,7 +37,7 @@ class SimulatedAnnealing:
             raise ValueError('Annealing schedule must be either "exponential" or "linear"')
 
     def __init__(self, initial_state, max_steps, temp_begin, schedule_constant,
-                 min_energy=None, schedule_str='exponential'):
+                 min_energy=None, schedule='exponential'):
         self.initial_state = initial_state
 
         if isinstance(max_steps, int) and max_steps > 0:
@@ -56,7 +56,7 @@ class SimulatedAnnealing:
         else:
             raise ValueError('Starting temperature must be a numeric type')
 
-        self.adjust_temp = self._get_schedule(schedule_str, schedule_constant)
+        self.adjust_temp = self._get_schedule(schedule, schedule_constant)
 
     def __str__(self):
         return ('SIMULATED ANNEALING: \n' +
