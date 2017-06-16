@@ -1,6 +1,6 @@
 from abc import ABCMeta, abstractmethod
 from random import random
-from numpy import apply_along_axis, argmin, array, copy, dot, fill_diagonal, zeros_like
+from numpy import apply_along_axis, argmin, array, copy, dot, fill_diagonal, zeros
 from numpy.random import uniform
 
 
@@ -45,12 +45,12 @@ class ParticleSwarm:
             raise ValueError('Member size must be a positive integer')
 
         if isinstance(lower_bound, (int, float)):
-            self.lower_bound = lower_bound
+            self.lower_bound = float(lower_bound)
         else:
             raise ValueError()
 
         if isinstance(upper_bound, (int, float)):
-            self.upper_bound = upper_bound
+            self.upper_bound = float(upper_bound)
         else:
             raise ValueError()
 
@@ -61,9 +61,9 @@ class ParticleSwarm:
         self.best = copy(self.pos)
 
         if isinstance(c1, (int, float)) and isinstance(c2, (int, float)) and isinstance(c3, (int, float)):
-            self.c1 = c1
-            self.c2 = c2
-            self.c3 = c3
+            self.c1 = float(c1)
+            self.c2 = float(c2)
+            self.c3 = float(c3)
         else:
             raise ValueError()
 
@@ -74,7 +74,7 @@ class ParticleSwarm:
 
         if min_objective is not None:
             if isinstance(min_objective, (int, float)):
-                self.min_objective = min_objective
+                self.min_objective = float(min_objective)
             else:
                 raise ValueError()
 
@@ -125,8 +125,8 @@ class ParticleSwarm:
             if (i % 100 == 0) and verbose:
                 print self
 
-            u1 = fill_diagonal(zeros_like(self.pos), random())
-            u2 = fill_diagonal(zeros_like(self.pos), random())
+            u1 = fill_diagonal(zeros((self.swarm_size, self.swarm_size)), random())
+            u2 = fill_diagonal(zeros((self.swarm_size, self.swarm_size), random()))
 
             vel_new = (self.c1 * self.vel) + \
                       (self.c2 * dot(u1, (self.best - self.pos))) + \
