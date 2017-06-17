@@ -28,19 +28,13 @@ class ParticleSwarm:
 
     def __init__(self, swarm_size, member_size, lower_bound, upper_bound, c1, c2, c3,
                  max_steps, min_objective=None):
-        if isinstance(swarm_size, int):
-            if swarm_size > 0:
-                self.swarm_size = swarm_size
-            else:
-                raise ValueError('Swarm size must be a positive integer')
+        if isinstance(swarm_size, int) and swarm_size > 0:
+            self.swarm_size = swarm_size
         else:
             raise ValueError('Swarm size must be a positive integer')
 
-        if isinstance(member_size, int):
-            if member_size > 0:
-                self.member_size = member_size
-            else:
-                raise ValueError('Member size must be a positive integer')
+        if isinstance(member_size, int) and member_size > 0:
+            self.member_size = member_size
         else:
             raise ValueError('Member size must be a positive integer')
 
