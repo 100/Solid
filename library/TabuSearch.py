@@ -30,7 +30,11 @@ class TabuSearch:
                 raise TypeError('Maximum score must be a numeric type')
 
     def __str__(self):
-        pass
+        return ('TABU SEARCH: \n' +
+                'CURRENT STEPS: %d \n' +
+                'BEST SCORE: %f \n' +
+                'BEST MEMBER: %s \n\n') % \
+               (self.cur_steps, self._score(self.best), str(self.best))
 
     def __repr__(self):
         return self.__str__()

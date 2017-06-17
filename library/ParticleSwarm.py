@@ -120,7 +120,7 @@ class ParticleSwarm:
                 print self
 
             u1 = fill_diagonal(zeros((self.swarm_size, self.swarm_size)), random())
-            u2 = fill_diagonal(zeros((self.swarm_size, self.swarm_size), random()))
+            u2 = fill_diagonal(zeros((self.swarm_size, self.swarm_size)), random())
 
             vel_new = (self.c1 * self.vel) + \
                       (self.c2 * dot(u1, (self.best - self.pos))) + \
