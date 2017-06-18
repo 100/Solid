@@ -4,6 +4,9 @@ from random import randint, random, shuffle
 
 
 class GeneticAlgorithm:
+    """
+    Conducts genetic algorithm
+    """
     __metaclass__ = ABCMeta
 
     population = None
@@ -21,6 +24,13 @@ class GeneticAlgorithm:
     max_fitness = None
 
     def __init__(self, crossover_rate, mutation_rate, max_steps, max_fitness=None):
+        """
+
+        :param crossover_rate: probability of crossover
+        :param mutation_rate: probability of mutation
+        :param max_steps: maximum steps to run genetic algorithm for
+        :param max_fitness: fitness value to stop algorithm once reached
+        """
         if isinstance(crossover_rate, float):
             if crossover_rate >= 0 and crossover_rate <= 1:
                 self.crossover_rate = crossover_rate
@@ -59,6 +69,11 @@ class GeneticAlgorithm:
         return self.__str__()
 
     def _clear(self):
+        """
+        Resets the variables that are altered on a per-run basis of the algorithm
+
+        :return: None
+        """
         self.cur_steps = 0
         self.population = None
         self.fitnesses = None
@@ -67,16 +82,38 @@ class GeneticAlgorithm:
 
     @abstractmethod
     def _initial_population(self):
+        """
+        Generates initial population -
+        members must be represented by a list of binary-values integers
+
+        :return: list of members of population
+        """
         pass
 
     @abstractmethod
     def _fitness(self, member):
+        """
+        Evaluates fitness of a given member
+
+        :param member: a member
+        :return: fitness of member
+        """
         pass
 
     def _populate_fitness(self):
+        """
+        Calculates fitness of all members of current population
+
+        :return: None
+        """
         self.fitnesses = list([self._fitness(x) for x in self.population])
 
     def _most_fit(self):
+        """
+        Finds most fit member of current population
+
+        :return: most fit member and most fit member's fitness
+        """
         best_idx = 0
         cur_idx = 0
         for x in self.fitnesses:
@@ -86,6 +123,13 @@ class GeneticAlgorithm:
         return self.population[best_idx], self.fitnesses[best_idx]
 
     def _select_n(self, n):
+        """
+        Probabilistically selects n members from current population using
+        roulette-wheel selection
+
+        :param n: number of members to select
+        :return: n members
+        """
         shuffle(self.population)
         total_fitness = sum(self.fitnesses)
         probs = list([self._fitness(x) / total_fitness for x in self.population])
@@ -100,15 +144,34 @@ class GeneticAlgorithm:
         return res
 
     def _crossover(self, parent1, parent2):
+        """
+        Creates new member of population by combining two parent members
+
+        :param parent1: a member
+        :param parent2: a member
+        :return: member made by combining elements of both parents
+        """
         partition = randint(0, len(self.population[0] - 1))
         return parent1[0:partition] + parent2[partition:]
 
     def _mutate(self, member):
+        """
+        Randomly mutates a member
+
+        :param member: a member
+        :return: mutated member
+        """
         if self.mutation_rate >= random():
             idx = randint(0, len(member) - 1)
             member[idx] = 1 if member[idx] == 0 else 1
 
     def genetic_algorithm(self, verbose=True):
+        """
+        Conducts genetic algorithm
+
+        :param verbose: indicates whether or not to print progress regularly
+        :return: best state and best objective function value
+        """
         num_copy = int((1 - self.crossover_rate) * len(self.population))
         num_crossover = len(self.population) - num_copy
         self._clear()

@@ -5,6 +5,9 @@ from random import random
 
 
 class StochasticHillClimb:
+    """
+    Conducts stochastic hill climb
+    """
     __metaclass__ = ABCMeta
 
     initial_state = None
@@ -20,6 +23,13 @@ class StochasticHillClimb:
     temp = None
 
     def __init__(self, initial_state, max_steps, temp, max_objective=None):
+        """
+        
+        :param initial_state: initial state of hill climbing
+        :param max_steps: maximum steps to run hill climbing for
+        :param temp: temperature in probabilistic acceptance of transition
+        :param max_objective: objective function to stop algorithm once reached
+        """
         self.initial_state = initial_state
 
         if isinstance(max_steps, int) and max_steps > 0:
@@ -49,6 +59,11 @@ class StochasticHillClimb:
         return self.__str__()
 
     def _clear(self):
+        """
+        Resets the variables that are altered on a per-run basis of the algorithm
+
+        :return: None
+        """
         self.cur_steps = 0
         self.current_state = None
         self.best_state = None
@@ -56,17 +71,40 @@ class StochasticHillClimb:
 
     @abstractmethod
     def _neighbor(self):
+        """
+        Returns a random member of the neighbor of the current state
+
+        :return: a random neighbor, given access to self.current_state
+        """
         pass
 
     @abstractmethod
     def _objective(self, state):
+        """
+        Evaluates a given state
+
+        :param state: a state
+        :return: objective function value of state
+        """
         pass
 
     def _accept_neighbor(self, neighbor):
+        """
+        Probabilistically determines whether or not to accept a transition to a neighbor
+
+        :param neighbor: a state
+        :return: boolean indicating whether or not transition was accepted
+        """
         p = 1. / (1 + (exp(self._objective(self.current_state) - self._objective(neighbor)) / self.temp))
         return True if p >= 1 else p >= random()
 
     def anneal(self, verbose=True):
+        """
+        Conducts simulated annealing
+
+        :param verbose: indicates whether or not to print progress regularly
+        :return: best state and best objective function value
+        """
         self._clear()
         self.current_state = self.initial_state
         for i in range(self.max_steps):

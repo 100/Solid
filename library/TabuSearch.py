@@ -5,6 +5,9 @@ from collections import deque
 from numpy import argmax
 
 class TabuSearch:
+    """
+    Conducts tabu search
+    """
     __metaclass__ = ABCMeta
 
     cur_steps = None
@@ -15,13 +18,25 @@ class TabuSearch:
     current = None
     best = None
 
+    max_steps = None
     max_score = None
 
-    def __init__(self, tabu_size, max_score=None):
+    def __init__(self, tabu_size, max_steps, max_score=None):
+        """
+
+        :param tabu_size: number of states to keep in tabu list
+        :param max_steps: maximum number of steps to run algorithm for
+        :param max_score: score to stop algorithm once reached
+        """
         if isinstance(tabu_size, int) and tabu_size > 0:
             self.tabu_size = tabu_size
         else:
             raise TypeError('Tabu size must be a positive integer')
+
+        if isinstance(max_steps, int) and max_steps > 0:
+            self.max_steps = max_steps
+        else:
+            raise TypeError('Maximum steps must be a positive integer')
 
         if max_score is not None:
             if isinstance(max_score, (int, float)):
@@ -40,23 +55,51 @@ class TabuSearch:
         return self.__str__()
 
     def _clear(self):
+        """
+        Resets the variables that are altered on a per-run basis of the algorithm
+
+        :return: None
+        """
         self.cur_steps = 0
         self.tabu_list = deque(maxlen=self.tabu_size)
         self.current = None
         self.best = None
 
     @abstractmethod
-    def _score(self):
+    def _score(self, state):
+        """
+        Returns objective function value of a state
+
+        :param state: a state
+        :return: objective function value of state
+        """
         pass
 
     @abstractmethod
     def _neighborhood(self):
+        """
+        Returns list of all members of neighborhood of current state
+
+        :return: list of members of neighborhood
+        """
         pass
 
     def _best(self, neighborhood):
+        """
+        Finds the best member of a neighborhood
+
+        :param neighborhood: a neighborhood
+        :return: best member of neighborhood
+        """
         return neighborhood[argmax([self._score(x) for x in neighborhood])]
 
     def tabu_search(self, verbose=True):
+        """
+        Conducts tabu search
+
+        :param verbose: indicates whether or not to print progress regularly
+        :return: best state and objective function value of best state
+        """
         self._clear()
         for i in range(self.max_steps):
             self.cur_steps += 1

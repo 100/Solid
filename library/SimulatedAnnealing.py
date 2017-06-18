@@ -5,6 +5,9 @@ from random import random
 
 
 class SimulatedAnnealing:
+    """
+    Conducts simulated annealing algorithm
+    """
     __metaclass__ = ABCMeta
 
     initial_state = None
@@ -38,6 +41,15 @@ class SimulatedAnnealing:
 
     def __init__(self, initial_state, max_steps, temp_begin, schedule_constant,
                  min_energy=None, schedule='exponential'):
+        """
+
+        :param initial_state: initial state of annealing algorithm
+        :param max_steps: maximum number of iterations to conduct annealing for
+        :param temp_begin: beginning temperature
+        :param schedule_constant: constant value in annealing schedule function
+        :param min_energy: energy value to stop algorithm once reached
+        :param schedule: 'exponential' or 'linear' annealing schedule
+        """
         self.initial_state = initial_state
 
         if isinstance(max_steps, int) and max_steps > 0:
@@ -70,6 +82,11 @@ class SimulatedAnnealing:
         return self.__str__()
 
     def _clear(self):
+        """
+        Resets the variables that are altered on a per-run basis of the algorithm
+
+        :return: None
+        """
         self.cur_steps = 0
         self.current_state = None
         self.best_state = None
@@ -78,17 +95,40 @@ class SimulatedAnnealing:
 
     @abstractmethod
     def _neighbor(self):
+        """
+        Returns a random member of the neighbor of the current state
+
+        :return: a random neighbor, given access to self.current_state
+        """
         pass
 
     @abstractmethod
     def _energy(self, state):
+        """
+        Finds the energy of a given state
+
+        :param state: a state
+        :return: energy of state
+        """
         pass
 
     def _accept_neighbor(self, neighbor):
+        """
+        Probabilistically determines whether or not to accept a transition to a neighbor
+
+        :param neighbor: a state
+        :return: boolean indicating whether or not transition is accepted
+        """
         p = exp(self._energy(self.current_state) - self._energy(neighbor)) / self.current_temp
         return True if p >= 1 else p >= random()
 
     def anneal(self, verbose=True):
+        """
+        Conducts simulated annealing
+
+        :param verbose: indicates whether or not to print progress regularly
+        :return: best state and best energy
+        """
         self._clear()
         self.current_state = self.initial_state
         self.current_temp = self.start_temp

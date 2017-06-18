@@ -4,6 +4,9 @@ from numpy import argmax, argmin
 
 
 class HarmonySearch:
+    """
+    Conducts harmony search
+    """
     __metaclass__ = ABCMeta
 
     cur_steps = None
@@ -21,6 +24,15 @@ class HarmonySearch:
     max_score = None
 
     def __init__(self, hms, hmcr, par, fw, max_steps, max_score=None):
+        """
+
+        :param hms: harmony memory size
+        :param hmcr: harmony memory considering rate
+        :param par: pitch adjustment rate
+        :param fw: fret width
+        :param max_steps: maximum number of steps to run algorithm for
+        :param max_score: objective function value to stop algorithm once reached
+        """
         if isinstance(hms, int) and hms > 0:
             self.hms = hms
         else:
@@ -63,28 +75,65 @@ class HarmonySearch:
         return self.__str__()
 
     def _clear(self):
+        """
+        Resets the variables that are altered on a per-run basis of the algorithm
+
+        :return: None
+        """
         self.cur_steps = 0
         self.memory = list([self._random_harmony() for _ in range(self.hms)])
         self.scores = None
 
     @abstractmethod
     def _random_harmony(self):
+        """
+        Generates a list of random harmonies, each represented as a list of floats
+
+        :return: list of harmonies
+        """
         pass
 
     @abstractmethod
     def _score(self, harmony):
+        """
+        Returns score of a harmony
+
+        :param harmony: a harmony
+        :return: score of harmony
+        """
         pass
 
     def _score_all(self):
+        """
+        Finds score of all current harmonies in memory
+
+        :return: None
+        """
         self.scores = list([self._score(x) for x in self.memory])
 
     def _worst_score(self):
+        """
+        Returns index of worst harmony in memory
+
+        :return: index of worst harmony in memory
+        """
         return argmin(self.scores)
 
     def _best_score(self):
+        """
+        Returns index of best harmony in memory
+
+        :return: index of best harmony in memory
+        """
         return argmax(self.scores)
 
     def harmony_search(self, verbose=True):
+        """
+        Conducts harmony search
+
+        :param verbose: indicates whether or not to print progress regularly
+        :return: best state and objective function value of best state
+        """
         self._clear()
         for i in range(self.max_steps):
             self.cur_steps += 1
