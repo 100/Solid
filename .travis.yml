@@ -2,4 +2,4 @@ language: python
 install:
   - pip install numpy
   - pip install .
-script: pytest -s
+script: py.test -s
