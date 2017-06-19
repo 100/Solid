@@ -1,4 +1,4 @@
-from library.ParticleSwarm import ParticleSwarm
+from Solid.ParticleSwarm import ParticleSwarm
 
 
 class Algorithm(ParticleSwarm):

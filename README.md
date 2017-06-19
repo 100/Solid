@@ -1,4 +1,12 @@
-# Metaheuristics-library-placeholder
+# Solid
+
+## *Solid* is a simple library for gradient-free optimization.
+
+#### It contains basic versions of many of the most common algorithms, and allows for very rapid development using them.
+
+#### It's a very versatile library that's great for learning, modifying, and of course, using out-of-the-box.
+
+<hr>
 
 ## Current Features:
 * Genetic Algorithm
@@ -12,10 +20,10 @@
 <hr>
 
 ## Usage:
-* ```pip install``` 
+* ```pip install solidpy``` 
 * Import the relevant algorithm
 * Create a class that inherits from that algorithm, and that implements the necessary abstract methods
-* Call its ```.run()``` method
+* Call its ```.run()``` method, which always returns the best solution and its objective function value
 
 <hr>
 
@@ -24,7 +32,7 @@
 ```python
 from random import choice, randint, random
 from string import lowercase
-from library.EvolutionaryAlgorithm import EvolutionaryAlgorithm
+from Solid import EvolutionaryAlgorithm
 
 
 class Algorithm(EvolutionaryAlgorithm):

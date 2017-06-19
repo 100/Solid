@@ -1,5 +1,5 @@
 from random import uniform
-from library.HarmonySearch import HarmonySearch
+from Solid.HarmonySearch import HarmonySearch
 
 
 class Algorithm(HarmonySearch):

@@ -1,5 +1,5 @@
 from random import uniform
-from library.StochasticHillClimb import StochasticHillClimb
+from Solid.StochasticHillClimb import StochasticHillClimb
 from numpy import array
 
 

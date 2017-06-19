@@ -1,6 +1,6 @@
 from random import choice, randint, random
 from string import lowercase
-from library.TabuSearch import TabuSearch
+from Solid.TabuSearch import TabuSearch
 from copy import deepcopy
 
 

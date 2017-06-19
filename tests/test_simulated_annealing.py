@@ -1,5 +1,5 @@
 from random import uniform
-from library.SimulatedAnnealing import SimulatedAnnealing
+from Solid.SimulatedAnnealing import SimulatedAnnealing
 from numpy import array
 
 
