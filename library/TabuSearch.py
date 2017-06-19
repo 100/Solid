@@ -25,7 +25,7 @@ class TabuSearch:
     def __init__(self, initial_state, tabu_size, max_steps, max_score=None):
         """
 
-        :param initial_state: initial state
+        :param initial_state: initial state, should implement __eq__ or __cmp__
         :param tabu_size: number of states to keep in tabu list
         :param max_steps: maximum number of steps to run algorithm for
         :param max_score: score to stop algorithm once reached
