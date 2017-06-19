@@ -1,4 +1,10 @@
+<div align="center>
 # Solid
+</div>
+<br>
+
+[![Build Status](https://travis-ci.org/100/Solid.svg?branch=master)](https://travis-ci.org/100/Solid)
+[![MIT License](https://img.shields.io/dub/l/vibe-d.svg)](https://github.com/100/Cranium/blob/master/LICENSE)
 
 ## *Solid* is a simple Python library for gradient-free optimization.
 
