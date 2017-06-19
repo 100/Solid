@@ -53,19 +53,19 @@ class ParticleSwarm:
         else:
             raise ValueError('Member size must be a positive integer')
 
-        if isinstance(lower_bound, (int, float)):
-            self.lower_bound = float(lower_bound)
+        if all([isinstance(x, (int, float)) for x in lower_bound]):
+            self.lower_bound = array([float(x) for x in lower_bound])
         else:
-            raise ValueError()
+            raise ValueError('Lower bounds must be numeric types')
 
-        if isinstance(upper_bound, (int, float)):
-            self.upper_bound = float(upper_bound)
+        if all([isinstance(x, (int, float)) for x in upper_bound]):
+            self.upper_bound = array([float(x) for x in upper_bound])
         else:
-            raise ValueError()
+            raise ValueError('Upper bounds must be numeric types')
 
-        self.pos = uniform(lower_bound, upper_bound, size=(swarm_size, member_size))
+        self.pos = uniform(self.lower_bound, self.upper_bound, size=(swarm_size, member_size))
 
-        self.vel = uniform(upper_bound - lower_bound, lower_bound - upper_bound, size=(swarm_size, member_size))
+        self.vel = uniform(self.lower_bound - self.upper_bound, self.upper_bound - self.lower_bound, size=(swarm_size, member_size))
 
         self.best = copy(self.pos)
 
@@ -92,7 +92,7 @@ class ParticleSwarm:
                 'CURRENT STEPS: %d \n' +
                 'BEST FITNESS: %f \n' +
                 'BEST MEMBER: %s \n\n') % \
-               (self.cur_steps, self._score(self.global_best[0]), str(self.global_best[0]))
+               (self.cur_steps, self._objective(self.global_best[0]), str(self.global_best[0]))
 
     def __repr__(self):
         return self.__str__()
@@ -104,10 +104,11 @@ class ParticleSwarm:
         :return: None
         """
         self.pos = uniform(self.lower_bound, self.upper_bound, size=(self.swarm_size, self.member_size))
-        self.vel = uniform(self.upper_bound - self.lower_bound, self.lower_bound - self.upper_bound, size=(self.swarm_size, self.member_size))
+        self.vel = uniform(self.lower_bound - self.upper_bound, self.upper_bound - self.lower_bound, size=(self.swarm_size, self.member_size))
         self.scores = self._score(self.pos)
         self.best = copy(self.pos)
         self.cur_steps = 0
+        self._global_best()
 
     @abstractmethod
     def _objective(self, member):
@@ -122,10 +123,10 @@ class ParticleSwarm:
 
     def _score(self, pos):
         """
-        Applies objective function to a member of swarm
+        Applies objective function to all members of swarm
 
-        :param pos:
-        :return:
+        :param pos: position matrix
+        :return: score vector
         """
         return apply_along_axis(self._objective, 1, pos)
 
@@ -137,11 +138,11 @@ class ParticleSwarm:
         :param new: new values
         :return: None
         """
-        old_score = self._score(old)
-        new_score = self._score(new)
+        old_scores = self._score(old)
+        new_scores = self._score(new)
         best = []
-        for i in range(len(old_score)):
-            if old_score > new_score:
+        for i in range(len(old_scores)):
+            if old_scores[i] < new_scores[i]:
                 best.append(old[i])
             else:
                 best.append(new[i])
@@ -153,7 +154,7 @@ class ParticleSwarm:
 
         :return: None
         """
-        if min(self.scores) < self.global_best[0][0]:
+        if self.global_best is None or min(self.scores) < self._objective(self.global_best[0]):
             self.global_best = array([self.pos[argmin(self.scores)],] * self.swarm_size)
 
     def run(self, verbose=True):
@@ -167,7 +168,7 @@ class ParticleSwarm:
         for i in range(self.max_steps):
             self.cur_steps += 1
 
-            if (i % 100 == 0) and verbose:
+            if ((i + 1) % 100 == 0) and verbose:
                 print self
 
             u1 = zeros((self.swarm_size, self.swarm_size))
@@ -186,8 +187,8 @@ class ParticleSwarm:
             self.scores = self._score(self.pos)
             self._global_best()
 
-            if self._score(self.global_best[0]) < self.min_objective:
+            if self._objective(self.global_best[0]) < self.min_objective:
                 print "TERMINATING - REACHED MINIMUM OBJECTIVE"
-                return self.global_best[0], self._score(self.global_best[0])
+                return self.global_best[0], self._objective(self.global_best[0])
         print "TERMINATING - REACHED MAXIMUM STEPS"
-        return self.global_best[0], self._score(self.global_best[0])
+        return self.global_best[0], self._objective(self.global_best[0])

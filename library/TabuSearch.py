@@ -15,19 +15,23 @@ class TabuSearch:
     tabu_size = None
     tabu_list = None
 
+    initial_state = None
     current = None
     best = None
 
     max_steps = None
     max_score = None
 
-    def __init__(self, tabu_size, max_steps, max_score=None):
+    def __init__(self, initial_state, tabu_size, max_steps, max_score=None):
         """
 
+        :param initial_state: initial state
         :param tabu_size: number of states to keep in tabu list
         :param max_steps: maximum number of steps to run algorithm for
         :param max_score: score to stop algorithm once reached
         """
+        self.initial_state = initial_state
+
         if isinstance(tabu_size, int) and tabu_size > 0:
             self.tabu_size = tabu_size
         else:
@@ -62,8 +66,8 @@ class TabuSearch:
         """
         self.cur_steps = 0
         self.tabu_list = deque(maxlen=self.tabu_size)
-        self.current = None
-        self.best = None
+        self.current = self.initial_state
+        self.best = self.initial_state
 
     @abstractmethod
     def _score(self, state):
@@ -78,7 +82,7 @@ class TabuSearch:
     @abstractmethod
     def _neighborhood(self):
         """
-        Returns list of all members of neighborhood of current state
+        Returns list of all members of neighborhood of current state, given self.current
 
         :return: list of members of neighborhood
         """
@@ -104,7 +108,7 @@ class TabuSearch:
         for i in range(self.max_steps):
             self.cur_steps += 1
 
-            if (i % 100 == 0) and verbose:
+            if ((i + 1) % 100 == 0) and verbose:
                 print self
 
             neighborhood = self._neighborhood()
@@ -117,14 +121,16 @@ class TabuSearch:
                 if neighborhood_best in self.tabu_list:
                     if self._score(neighborhood_best) > self._score(self.best):
                         self.tabu_list.append(neighborhood_best)
-                        self.best = neighborhood_best
+                        self.best = deepcopy(neighborhood_best)
                         break
                     else:
                         neighborhood.remove(neighborhood_best)
                         neighborhood_best = self._best(neighborhood)
                 else:
                     self.tabu_list.append(neighborhood_best)
-                    self.best = neighborhood_best
+                    self.current = neighborhood_best
+                    if self._score(self.current) > self._score(self.best):
+                        self.best = deepcopy(self.current)
                     break
 
             if self.max_score is not None and self._score(self.best) > self.max_score:

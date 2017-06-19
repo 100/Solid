@@ -26,10 +26,14 @@ class SimulatedAnnealing:
     adjust_temp = None
 
     def _exponential(self, schedule_constant):
-        self.current_temp *= schedule_constant
+        def f():
+            self.current_temp *= schedule_constant
+        return f
 
     def _linear(self, schedule_constant):
-        self.current_temp -= schedule_constant
+        def f():
+            self.current_temp -= schedule_constant
+        return f
 
     def _get_schedule(self, schedule_str, schedule_constant):
         if schedule_str == 'exponential':
@@ -39,7 +43,7 @@ class SimulatedAnnealing:
         else:
             raise ValueError('Annealing schedule must be either "exponential" or "linear"')
 
-    def __init__(self, initial_state, max_steps, temp_begin, schedule_constant,
+    def __init__(self, initial_state, temp_begin, schedule_constant, max_steps,
                  min_energy=None, schedule='exponential'):
         """
 
@@ -119,7 +123,10 @@ class SimulatedAnnealing:
         :param neighbor: a state
         :return: boolean indicating whether or not transition is accepted
         """
-        p = exp(self._energy(self.current_state) - self._energy(neighbor)) / self.current_temp
+        try:
+            p = exp(-(self._energy(neighbor) - self._energy(self.current_state)) / self.current_temp)
+        except OverflowError:
+            return True
         return True if p >= 1 else p >= random()
 
     def run(self, verbose=True):
@@ -132,10 +139,11 @@ class SimulatedAnnealing:
         self._clear()
         self.current_state = self.initial_state
         self.current_temp = self.start_temp
+        self.best_energy = self._energy(self.current_state)
         for i in range(self.max_steps):
             self.cur_steps += 1
 
-            if (i % 100 == 0) and verbose:
+            if ((i + 1) % 100 == 0) and verbose:
                 print self
 
             neighbor = self._neighbor()
@@ -152,6 +160,9 @@ class SimulatedAnnealing:
                 print "TERMINATING - REACHED MINIMUM ENERGY"
                 return self.best_state, self.best_energy
 
-            self.current_temp = self.adjust_temp()
+            self.adjust_temp()
+            if self.current_temp < 0.000001:
+                print "TERMINATING - REACHED TEMPERATURE OF 0"
+                return self.best_state, self.best_energy
         print "TERMINATING - REACHED MAXIMUM STEPS"
         return self.best_state, self.best_energy

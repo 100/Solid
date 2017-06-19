@@ -22,7 +22,7 @@ class StochasticHillClimb:
 
     temp = None
 
-    def __init__(self, initial_state, max_steps, temp, max_objective=None):
+    def __init__(self, initial_state, temp, max_steps, max_objective=None):
         """
         
         :param initial_state: initial state of hill climbing
@@ -95,7 +95,10 @@ class StochasticHillClimb:
         :param neighbor: a state
         :return: boolean indicating whether or not transition was accepted
         """
-        p = 1. / (1 + (exp(self._objective(self.current_state) - self._objective(neighbor)) / self.temp))
+        try:
+            p = 1. / (1 + (exp((self._objective(self.current_state) - self._objective(neighbor)) / self.temp)))
+        except OverflowError:
+            return True
         return True if p >= 1 else p >= random()
 
     def run(self, verbose=True):
@@ -110,7 +113,7 @@ class StochasticHillClimb:
         for i in range(self.max_steps):
             self.cur_steps += 1
 
-            if (i % 100 == 0) and verbose:
+            if ((i + 1) % 100 == 0) and verbose:
                 print self
 
             neighbor = self._neighbor()
