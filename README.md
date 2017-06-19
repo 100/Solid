@@ -1,6 +1,6 @@
 # Solid
 
-## *Solid* is a simple library for gradient-free optimization.
+## *Solid* is a simple Python library for gradient-free optimization.
 
 #### It contains basic versions of many of the most common algorithms, and allows for very rapid development using them.
 
