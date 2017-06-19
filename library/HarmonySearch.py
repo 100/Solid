@@ -87,7 +87,7 @@ class HarmonySearch:
     @abstractmethod
     def _random_harmony(self):
         """
-        Generates a list of random harmonies, each represented as a list of floats
+        Generates a random harmony, represented as a list of floats
 
         :return: list of harmonies
         """
@@ -127,7 +127,7 @@ class HarmonySearch:
         """
         return argmax(self.scores)
 
-    def harmony_search(self, verbose=True):
+    def run(self, verbose=True):
         """
         Conducts harmony search
 
@@ -135,15 +135,16 @@ class HarmonySearch:
         :return: best state and objective function value of best state
         """
         self._clear()
+        self._score_all()
         for i in range(self.max_steps):
             self.cur_steps += 1
 
-            if (i % 100 == 0) and verbose:
+            if ((i + 1) % 100 == 0) and verbose:
                 print self
 
             self._score_all()
 
-            selected = [] * len(self.memory[0])
+            selected = [0.] * len(self.memory[0])
             for i in range(len(selected)):
                 if self.hmcr >= random():
                     selected_component = choice(self.memory)[i]
@@ -151,9 +152,9 @@ class HarmonySearch:
                         selected_component += uniform(-1, 1) * self.fw
                 else:
                     selected_component = self._random_harmony()[i]
-                selected.append(selected_component)
+                selected[i] = selected_component
 
-            if self._score(selected_component) > self.score(self._worst_score()):
+            if self._score(selected) > self._score(self.memory[self._worst_score()]):
                 self.memory[self._worst_score()] = selected
                 self.scores[self._worst_score()] = self._score(selected)
 

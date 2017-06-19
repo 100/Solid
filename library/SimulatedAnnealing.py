@@ -122,7 +122,7 @@ class SimulatedAnnealing:
         p = exp(self._energy(self.current_state) - self._energy(neighbor)) / self.current_temp
         return True if p >= 1 else p >= random()
 
-    def anneal(self, verbose=True):
+    def run(self, verbose=True):
         """
         Conducts simulated annealing
 

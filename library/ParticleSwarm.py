@@ -156,7 +156,7 @@ class ParticleSwarm:
         if min(self.scores) < self.global_best[0][0]:
             self.global_best = array([self.pos[argmin(self.scores)],] * self.swarm_size)
 
-    def swarm(self, verbose=True):
+    def run(self, verbose=True):
         """
         Conducts particle swarm optimization
 

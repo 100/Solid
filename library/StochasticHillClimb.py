@@ -98,9 +98,9 @@ class StochasticHillClimb:
         p = 1. / (1 + (exp(self._objective(self.current_state) - self._objective(neighbor)) / self.temp))
         return True if p >= 1 else p >= random()
 
-    def anneal(self, verbose=True):
+    def run(self, verbose=True):
         """
-        Conducts simulated annealing
+        Conducts hill climb
 
         :param verbose: indicates whether or not to print progress regularly
         :return: best state and best objective function value

@@ -132,15 +132,19 @@ class GeneticAlgorithm:
         """
         shuffle(self.population)
         total_fitness = sum(self.fitnesses)
-        probs = list([self._fitness(x) / total_fitness for x in self.population])
+        if total_fitness != 0:
+            probs = list([self._fitness(x) / total_fitness for x in self.population])
+        else:
+            return self.population[0:n]
         res = []
-        for _ in probs:
+        for _ in range(n):
             r = random()
-            sum = 0
+            sum_ = 0
             for i, x in enumerate(probs):
-                sum += probs[i]
-                if r < sum:
-                    res.add(deepcopy(self.population[i]))
+                sum_ += probs[i]
+                if r <= sum_:
+                    res.append(deepcopy(self.population[i]))
+                    break
         return res
 
     def _crossover(self, parent1, parent2):
@@ -151,7 +155,7 @@ class GeneticAlgorithm:
         :param parent2: a member
         :return: member made by combining elements of both parents
         """
-        partition = randint(0, len(self.population[0] - 1))
+        partition = randint(0, len(self.population[0]) - 1)
         return parent1[0:partition] + parent2[partition:]
 
     def _mutate(self, member):
@@ -164,32 +168,35 @@ class GeneticAlgorithm:
         if self.mutation_rate >= random():
             idx = randint(0, len(member) - 1)
             member[idx] = 1 if member[idx] == 0 else 1
+        return member
 
-    def genetic_algorithm(self, verbose=True):
+    def run(self, verbose=True):
         """
         Conducts genetic algorithm
 
         :param verbose: indicates whether or not to print progress regularly
         :return: best state and best objective function value
         """
-        num_copy = int((1 - self.crossover_rate) * len(self.population))
-        num_crossover = len(self.population) - num_copy
         self._clear()
         self.population = self._initial_population()
+        self._populate_fitness()
+        self.best_member, self.best_fitness = self._most_fit()
+        num_copy = max(int((1 - self.crossover_rate) * len(self.population)), 2)
+        num_crossover = len(self.population) - num_copy
         for i in range(self.max_steps):
             self.cur_steps += 1
 
-            if (i % 100 == 0) and verbose:
+            if ((i + 1) % 100 == 0) and verbose:
                 print self
 
-            self._populate_fitness()
             self.population = self._select_n(num_copy)
+            self._populate_fitness()
 
             parents = self._select_n(2)
             for _ in range(num_crossover):
                 self.population.append(self._crossover(*parents))
 
-            self.population = list([self.mutate(x) for x in self.population])
+            self.population = list([self._mutate(x) for x in self.population])
             self._populate_fitness()
 
             best_member, best_fitness = self._most_fit()

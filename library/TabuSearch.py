@@ -93,7 +93,7 @@ class TabuSearch:
         """
         return neighborhood[argmax([self._score(x) for x in neighborhood])]
 
-    def tabu_search(self, verbose=True):
+    def run(self, verbose=True):
         """
         Conducts tabu search
 
