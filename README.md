@@ -9,7 +9,7 @@
 
 ## *Solid* is a Python library for gradient-free optimization.
 
-#### It contains basic versions of many of the most common algorithms, and allows for very rapid development using them.
+#### It contains basic versions of many of the most common [optimization algorithms that do not require the calculation of gradients](https://en.wikipedia.org/wiki/Derivative-free_optimization), and allows for very rapid development using them.
 
 #### It's a very versatile library that's great for learning, modifying, and of course, using out-of-the-box.
 
@@ -76,7 +76,7 @@ def test_algorithm():
 
 To run tests, look in the ```tests``` folder. 
 
-I use [pytest](https://docs.pytest.org/en/latest/); it should automatically find the test files. 
+Use [pytest](https://docs.pytest.org/en/latest/); it should automatically find the test files. 
 
 <hr>
 
