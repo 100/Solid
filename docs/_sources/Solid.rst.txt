@@ -1,0 +1,70 @@
+Solid package
+=============
+
+Submodules
+----------
+
+Solid\.EvolutionaryAlgorithm module
+-----------------------------------
+
+.. automodule:: Solid.EvolutionaryAlgorithm
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Solid\.GeneticAlgorithm module
+------------------------------
+
+.. automodule:: Solid.GeneticAlgorithm
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Solid\.HarmonySearch module
+---------------------------
+
+.. automodule:: Solid.HarmonySearch
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Solid\.ParticleSwarm module
+---------------------------
+
+.. automodule:: Solid.ParticleSwarm
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Solid\.SimulatedAnnealing module
+--------------------------------
+
+.. automodule:: Solid.SimulatedAnnealing
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Solid\.StochasticHillClimb module
+---------------------------------
+
+.. automodule:: Solid.StochasticHillClimb
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Solid\.TabuSearch module
+------------------------
+
+.. automodule:: Solid.TabuSearch
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: Solid
+    :members:
+    :undoc-members:
+    :show-inheritance:

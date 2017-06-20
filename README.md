@@ -1,12 +1,13 @@
-<div align="center>
-# Solid
+<div align="center">
+    <img src="logo.png"></img>
 </div>
+
 <br>
 
 [![Build Status](https://travis-ci.org/100/Solid.svg?branch=master)](https://travis-ci.org/100/Solid)
 [![MIT License](https://img.shields.io/dub/l/vibe-d.svg)](https://github.com/100/Cranium/blob/master/LICENSE)
 
-## *Solid* is a simple Python library for gradient-free optimization.
+## *Solid* is a Python library for gradient-free optimization.
 
 #### It contains basic versions of many of the most common algorithms, and allows for very rapid development using them.
 
@@ -15,13 +16,13 @@
 <hr>
 
 ## Current Features:
-* Genetic Algorithm
-* Evolutionary Algorithm
-* Simulated Annealing
-* Particle Swarm Optimization
-* Tabu Search
-* Harmony Search
-* Stochastic Hill Climb
+* [Genetic Algorithm](https://github.com/100/Solid/blob/master/Solid/GeneticAlgorithm.py)
+* [Evolutionary Algorithm](https://github.com/100/Solid/blob/master/Solid/EvolutionaryAlgorithm.py)
+* [Simulated Annealing](https://github.com/100/Solid/blob/master/Solid/SimulatedAnnealing.py)
+* [Particle Swarm Optimization](https://github.com/100/Solid/blob/master/Solid/ParticleSwarm.py)
+* [Tabu Search](https://github.com/100/Solid/blob/master/Solid/TabuSearch.py)
+* [Harmony Search](https://github.com/100/Solid/blob/master/Solid/HarmonySearch.py)
+* [Stochastic Hill Climb](https://github.com/100/Solid/blob/master/Solid/StochasticHillClimb.py)
 
 <hr>
 
@@ -65,13 +66,13 @@ class Algorithm(EvolutionaryAlgorithm):
 
 def test_algorithm():
     algorithm = Algorithm(.5, .7, 500, max_fitness=None)
-    algorithm.run()
+    best_solution, best_objective_value = algorithm.run()
 
 ```
 
 <hr>
 
-## Building and Testing
+## Testing
 
 To run tests, look in the ```tests``` folder. 
 

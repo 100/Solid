@@ -1,0 +1,227 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Solid.TabuSearch &#8212; Solid 0.11 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.11',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for Solid.TabuSearch</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="k">import</span> <span class="n">ABCMeta</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">randint</span><span class="p">,</span> <span class="n">random</span><span class="p">,</span> <span class="n">shuffle</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">deque</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">argmax</span>
+
+<div class="viewcode-block" id="TabuSearch"><a class="viewcode-back" href="../../Solid.html#Solid.TabuSearch.TabuSearch">[docs]</a><span class="k">class</span> <span class="nc">TabuSearch</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Conducts tabu search</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">ABCMeta</span>
+
+    <span class="n">cur_steps</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">tabu_size</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">tabu_list</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">initial_state</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">best</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">max_steps</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">max_score</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initial_state</span><span class="p">,</span> <span class="n">tabu_size</span><span class="p">,</span> <span class="n">max_steps</span><span class="p">,</span> <span class="n">max_score</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param initial_state: initial state, should implement __eq__ or __cmp__</span>
+<span class="sd">        :param tabu_size: number of states to keep in tabu list</span>
+<span class="sd">        :param max_steps: maximum number of steps to run algorithm for</span>
+<span class="sd">        :param max_score: score to stop algorithm once reached</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initial_state</span> <span class="o">=</span> <span class="n">initial_state</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tabu_size</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">tabu_size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tabu_size</span> <span class="o">=</span> <span class="n">tabu_size</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Tabu size must be a positive integer&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">max_steps</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">max_steps</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_steps</span> <span class="o">=</span> <span class="n">max_steps</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Maximum steps must be a positive integer&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">max_score</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">max_score</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">max_score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">max_score</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Maximum score must be a numeric type&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s1">&#39;TABU SEARCH: </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>
+                <span class="s1">&#39;CURRENT STEPS: </span><span class="si">%d</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>
+                <span class="s1">&#39;BEST SCORE: </span><span class="si">%f</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>
+                <span class="s1">&#39;BEST MEMBER: </span><span class="si">%s</span><span class="s1"> </span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">%</span> \
+               <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_steps</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_score</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">best</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">best</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resets the variables that are altered on a per-run basis of the algorithm</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cur_steps</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tabu_list</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tabu_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">best</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_state</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">_score</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns objective function value of a state</span>
+
+<span class="sd">        :param state: a state</span>
+<span class="sd">        :return: objective function value of state</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">_neighborhood</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns list of all members of neighborhood of current state, given self.current</span>
+
+<span class="sd">        :return: list of members of neighborhood</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">_best</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neighborhood</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Finds the best member of a neighborhood</span>
+
+<span class="sd">        :param neighborhood: a neighborhood</span>
+<span class="sd">        :return: best member of neighborhood</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">neighborhood</span><span class="p">[</span><span class="n">argmax</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_score</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">neighborhood</span><span class="p">])]</span>
+
+<div class="viewcode-block" id="TabuSearch.run"><a class="viewcode-back" href="../../Solid.html#Solid.TabuSearch.TabuSearch.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Conducts tabu search</span>
+
+<span class="sd">        :param verbose: indicates whether or not to print progress regularly</span>
+<span class="sd">        :return: best state and objective function value of best state</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clear</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_steps</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cur_steps</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span> <span class="bp">self</span>
+
+            <span class="n">neighborhood</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_neighborhood</span><span class="p">()</span>
+            <span class="n">neighborhood_best</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_best</span><span class="p">(</span><span class="n">neighborhood</span><span class="p">)</span>
+
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">all</span><span class="p">([</span><span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabu_list</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">neighborhood</span><span class="p">]):</span>
+                    <span class="nb">print</span> <span class="s2">&quot;TERMINATING - NO SUITABLE NEIGHBORS&quot;</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">best</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_score</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">best</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">neighborhood_best</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabu_list</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_score</span><span class="p">(</span><span class="n">neighborhood_best</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_score</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">best</span><span class="p">):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">tabu_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">neighborhood_best</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">best</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">neighborhood_best</span><span class="p">)</span>
+                        <span class="k">break</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">neighborhood</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">neighborhood_best</span><span class="p">)</span>
+                        <span class="n">neighborhood_best</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_best</span><span class="p">(</span><span class="n">neighborhood</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">tabu_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">neighborhood_best</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">neighborhood_best</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_score</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_score</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">best</span><span class="p">):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">best</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="p">)</span>
+                    <span class="k">break</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_score</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_score</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">best</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_score</span><span class="p">:</span>
+                <span class="nb">print</span> <span class="s2">&quot;TERMINATING - REACHED MAXIMUM SCORE&quot;</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">best</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_score</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">best</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="s2">&quot;TERMINATING - REACHED MAXIMUM STEPS&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">best</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_score</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">best</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Devin Soni.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

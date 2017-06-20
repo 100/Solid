@@ -1,0 +1,749 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Solid package &#8212; Solid 0.11 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.11',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="solid-package">
+<h1>Solid package<a class="headerlink" href="#solid-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-Solid.EvolutionaryAlgorithm">
+<span id="solid-evolutionaryalgorithm-module"></span><h2>Solid.EvolutionaryAlgorithm module<a class="headerlink" href="#module-Solid.EvolutionaryAlgorithm" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm">
+<em class="property">class </em><code class="descclassname">Solid.EvolutionaryAlgorithm.</code><code class="descname">EvolutionaryAlgorithm</code><span class="sig-paren">(</span><em>crossover_rate</em>, <em>mutation_rate</em>, <em>max_steps</em>, <em>max_fitness=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Solid/EvolutionaryAlgorithm.html#EvolutionaryAlgorithm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Conducts evolutionary algorithm</p>
+<dl class="attribute">
+<dt id="Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm.best_fitness">
+<code class="descname">best_fitness</code><em class="property"> = None</em><a class="headerlink" href="#Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm.best_fitness" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm.best_member">
+<code class="descname">best_member</code><em class="property"> = None</em><a class="headerlink" href="#Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm.best_member" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm.crossover_rate">
+<code class="descname">crossover_rate</code><em class="property"> = None</em><a class="headerlink" href="#Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm.crossover_rate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm.cur_steps">
+<code class="descname">cur_steps</code><em class="property"> = None</em><a class="headerlink" href="#Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm.cur_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm.fitnesses">
+<code class="descname">fitnesses</code><em class="property"> = None</em><a class="headerlink" href="#Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm.fitnesses" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm.max_fitness">
+<code class="descname">max_fitness</code><em class="property"> = None</em><a class="headerlink" href="#Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm.max_fitness" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm.max_steps">
+<code class="descname">max_steps</code><em class="property"> = None</em><a class="headerlink" href="#Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm.max_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm.mutation_rate">
+<code class="descname">mutation_rate</code><em class="property"> = None</em><a class="headerlink" href="#Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm.mutation_rate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm.population">
+<code class="descname">population</code><em class="property"> = None</em><a class="headerlink" href="#Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm.population" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>verbose=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Solid/EvolutionaryAlgorithm.html#EvolutionaryAlgorithm.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Solid.EvolutionaryAlgorithm.EvolutionaryAlgorithm.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conducts evolutionary algorithm</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>verbose</strong> – indicates whether or not to print progress regularly</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">best state and best objective function value</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="Solid.EvolutionaryAlgorithm.random">
+<code class="descclassname">Solid.EvolutionaryAlgorithm.</code><code class="descname">random</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; x in the interval [0, 1).<a class="headerlink" href="#Solid.EvolutionaryAlgorithm.random" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-Solid.GeneticAlgorithm">
+<span id="solid-geneticalgorithm-module"></span><h2>Solid.GeneticAlgorithm module<a class="headerlink" href="#module-Solid.GeneticAlgorithm" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Solid.GeneticAlgorithm.GeneticAlgorithm">
+<em class="property">class </em><code class="descclassname">Solid.GeneticAlgorithm.</code><code class="descname">GeneticAlgorithm</code><span class="sig-paren">(</span><em>crossover_rate</em>, <em>mutation_rate</em>, <em>max_steps</em>, <em>max_fitness=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Solid/GeneticAlgorithm.html#GeneticAlgorithm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Solid.GeneticAlgorithm.GeneticAlgorithm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Conducts genetic algorithm</p>
+<dl class="attribute">
+<dt id="Solid.GeneticAlgorithm.GeneticAlgorithm.best_fitness">
+<code class="descname">best_fitness</code><em class="property"> = None</em><a class="headerlink" href="#Solid.GeneticAlgorithm.GeneticAlgorithm.best_fitness" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.GeneticAlgorithm.GeneticAlgorithm.best_member">
+<code class="descname">best_member</code><em class="property"> = None</em><a class="headerlink" href="#Solid.GeneticAlgorithm.GeneticAlgorithm.best_member" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.GeneticAlgorithm.GeneticAlgorithm.crossover_rate">
+<code class="descname">crossover_rate</code><em class="property"> = None</em><a class="headerlink" href="#Solid.GeneticAlgorithm.GeneticAlgorithm.crossover_rate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.GeneticAlgorithm.GeneticAlgorithm.cur_steps">
+<code class="descname">cur_steps</code><em class="property"> = None</em><a class="headerlink" href="#Solid.GeneticAlgorithm.GeneticAlgorithm.cur_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.GeneticAlgorithm.GeneticAlgorithm.fitnesses">
+<code class="descname">fitnesses</code><em class="property"> = None</em><a class="headerlink" href="#Solid.GeneticAlgorithm.GeneticAlgorithm.fitnesses" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.GeneticAlgorithm.GeneticAlgorithm.max_fitness">
+<code class="descname">max_fitness</code><em class="property"> = None</em><a class="headerlink" href="#Solid.GeneticAlgorithm.GeneticAlgorithm.max_fitness" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.GeneticAlgorithm.GeneticAlgorithm.max_steps">
+<code class="descname">max_steps</code><em class="property"> = None</em><a class="headerlink" href="#Solid.GeneticAlgorithm.GeneticAlgorithm.max_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.GeneticAlgorithm.GeneticAlgorithm.mutation_rate">
+<code class="descname">mutation_rate</code><em class="property"> = None</em><a class="headerlink" href="#Solid.GeneticAlgorithm.GeneticAlgorithm.mutation_rate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.GeneticAlgorithm.GeneticAlgorithm.population">
+<code class="descname">population</code><em class="property"> = None</em><a class="headerlink" href="#Solid.GeneticAlgorithm.GeneticAlgorithm.population" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="Solid.GeneticAlgorithm.GeneticAlgorithm.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>verbose=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Solid/GeneticAlgorithm.html#GeneticAlgorithm.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Solid.GeneticAlgorithm.GeneticAlgorithm.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conducts genetic algorithm</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>verbose</strong> – indicates whether or not to print progress regularly</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">best state and best objective function value</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="Solid.GeneticAlgorithm.random">
+<code class="descclassname">Solid.GeneticAlgorithm.</code><code class="descname">random</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; x in the interval [0, 1).<a class="headerlink" href="#Solid.GeneticAlgorithm.random" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-Solid.HarmonySearch">
+<span id="solid-harmonysearch-module"></span><h2>Solid.HarmonySearch module<a class="headerlink" href="#module-Solid.HarmonySearch" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Solid.HarmonySearch.HarmonySearch">
+<em class="property">class </em><code class="descclassname">Solid.HarmonySearch.</code><code class="descname">HarmonySearch</code><span class="sig-paren">(</span><em>hms</em>, <em>hmcr</em>, <em>par</em>, <em>fw</em>, <em>max_steps</em>, <em>max_score=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Solid/HarmonySearch.html#HarmonySearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Solid.HarmonySearch.HarmonySearch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Conducts harmony search</p>
+<dl class="attribute">
+<dt id="Solid.HarmonySearch.HarmonySearch.best">
+<code class="descname">best</code><em class="property"> = None</em><a class="headerlink" href="#Solid.HarmonySearch.HarmonySearch.best" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.HarmonySearch.HarmonySearch.cur_steps">
+<code class="descname">cur_steps</code><em class="property"> = None</em><a class="headerlink" href="#Solid.HarmonySearch.HarmonySearch.cur_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.HarmonySearch.HarmonySearch.fw">
+<code class="descname">fw</code><em class="property"> = None</em><a class="headerlink" href="#Solid.HarmonySearch.HarmonySearch.fw" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.HarmonySearch.HarmonySearch.hmcr">
+<code class="descname">hmcr</code><em class="property"> = None</em><a class="headerlink" href="#Solid.HarmonySearch.HarmonySearch.hmcr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.HarmonySearch.HarmonySearch.hms">
+<code class="descname">hms</code><em class="property"> = None</em><a class="headerlink" href="#Solid.HarmonySearch.HarmonySearch.hms" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.HarmonySearch.HarmonySearch.max_score">
+<code class="descname">max_score</code><em class="property"> = None</em><a class="headerlink" href="#Solid.HarmonySearch.HarmonySearch.max_score" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.HarmonySearch.HarmonySearch.max_steps">
+<code class="descname">max_steps</code><em class="property"> = None</em><a class="headerlink" href="#Solid.HarmonySearch.HarmonySearch.max_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.HarmonySearch.HarmonySearch.memory">
+<code class="descname">memory</code><em class="property"> = None</em><a class="headerlink" href="#Solid.HarmonySearch.HarmonySearch.memory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.HarmonySearch.HarmonySearch.par">
+<code class="descname">par</code><em class="property"> = None</em><a class="headerlink" href="#Solid.HarmonySearch.HarmonySearch.par" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="Solid.HarmonySearch.HarmonySearch.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>verbose=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Solid/HarmonySearch.html#HarmonySearch.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Solid.HarmonySearch.HarmonySearch.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conducts harmony search</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>verbose</strong> – indicates whether or not to print progress regularly</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">best state and objective function value of best state</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.HarmonySearch.HarmonySearch.scores">
+<code class="descname">scores</code><em class="property"> = None</em><a class="headerlink" href="#Solid.HarmonySearch.HarmonySearch.scores" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="Solid.HarmonySearch.random">
+<code class="descclassname">Solid.HarmonySearch.</code><code class="descname">random</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; x in the interval [0, 1).<a class="headerlink" href="#Solid.HarmonySearch.random" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-Solid.ParticleSwarm">
+<span id="solid-particleswarm-module"></span><h2>Solid.ParticleSwarm module<a class="headerlink" href="#module-Solid.ParticleSwarm" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Solid.ParticleSwarm.ParticleSwarm">
+<em class="property">class </em><code class="descclassname">Solid.ParticleSwarm.</code><code class="descname">ParticleSwarm</code><span class="sig-paren">(</span><em>swarm_size</em>, <em>member_size</em>, <em>lower_bound</em>, <em>upper_bound</em>, <em>c1</em>, <em>c2</em>, <em>c3</em>, <em>max_steps</em>, <em>min_objective=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Solid/ParticleSwarm.html#ParticleSwarm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Solid.ParticleSwarm.ParticleSwarm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Conducts particle swarm optimization</p>
+<dl class="attribute">
+<dt id="Solid.ParticleSwarm.ParticleSwarm.best">
+<code class="descname">best</code><em class="property"> = None</em><a class="headerlink" href="#Solid.ParticleSwarm.ParticleSwarm.best" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.ParticleSwarm.ParticleSwarm.c1">
+<code class="descname">c1</code><em class="property"> = None</em><a class="headerlink" href="#Solid.ParticleSwarm.ParticleSwarm.c1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.ParticleSwarm.ParticleSwarm.c2">
+<code class="descname">c2</code><em class="property"> = None</em><a class="headerlink" href="#Solid.ParticleSwarm.ParticleSwarm.c2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.ParticleSwarm.ParticleSwarm.c3">
+<code class="descname">c3</code><em class="property"> = None</em><a class="headerlink" href="#Solid.ParticleSwarm.ParticleSwarm.c3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.ParticleSwarm.ParticleSwarm.cur_steps">
+<code class="descname">cur_steps</code><em class="property"> = None</em><a class="headerlink" href="#Solid.ParticleSwarm.ParticleSwarm.cur_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.ParticleSwarm.ParticleSwarm.global_best">
+<code class="descname">global_best</code><em class="property"> = None</em><a class="headerlink" href="#Solid.ParticleSwarm.ParticleSwarm.global_best" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.ParticleSwarm.ParticleSwarm.lower_bound">
+<code class="descname">lower_bound</code><em class="property"> = None</em><a class="headerlink" href="#Solid.ParticleSwarm.ParticleSwarm.lower_bound" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.ParticleSwarm.ParticleSwarm.max_steps">
+<code class="descname">max_steps</code><em class="property"> = None</em><a class="headerlink" href="#Solid.ParticleSwarm.ParticleSwarm.max_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.ParticleSwarm.ParticleSwarm.member_size">
+<code class="descname">member_size</code><em class="property"> = None</em><a class="headerlink" href="#Solid.ParticleSwarm.ParticleSwarm.member_size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.ParticleSwarm.ParticleSwarm.min_objective">
+<code class="descname">min_objective</code><em class="property"> = None</em><a class="headerlink" href="#Solid.ParticleSwarm.ParticleSwarm.min_objective" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.ParticleSwarm.ParticleSwarm.pos">
+<code class="descname">pos</code><em class="property"> = None</em><a class="headerlink" href="#Solid.ParticleSwarm.ParticleSwarm.pos" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="Solid.ParticleSwarm.ParticleSwarm.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>verbose=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Solid/ParticleSwarm.html#ParticleSwarm.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Solid.ParticleSwarm.ParticleSwarm.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conducts particle swarm optimization</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>verbose</strong> – indicates whether or not to print progress regularly</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">best member of swarm and objective function value of best member of swarm</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.ParticleSwarm.ParticleSwarm.scores">
+<code class="descname">scores</code><em class="property"> = None</em><a class="headerlink" href="#Solid.ParticleSwarm.ParticleSwarm.scores" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.ParticleSwarm.ParticleSwarm.swarm_size">
+<code class="descname">swarm_size</code><em class="property"> = None</em><a class="headerlink" href="#Solid.ParticleSwarm.ParticleSwarm.swarm_size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.ParticleSwarm.ParticleSwarm.upper_bound">
+<code class="descname">upper_bound</code><em class="property"> = None</em><a class="headerlink" href="#Solid.ParticleSwarm.ParticleSwarm.upper_bound" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.ParticleSwarm.ParticleSwarm.vel">
+<code class="descname">vel</code><em class="property"> = None</em><a class="headerlink" href="#Solid.ParticleSwarm.ParticleSwarm.vel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="Solid.ParticleSwarm.random">
+<code class="descclassname">Solid.ParticleSwarm.</code><code class="descname">random</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; x in the interval [0, 1).<a class="headerlink" href="#Solid.ParticleSwarm.random" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="Solid.ParticleSwarm.uniform">
+<code class="descclassname">Solid.ParticleSwarm.</code><code class="descname">uniform</code><span class="sig-paren">(</span><em>low=0.0</em>, <em>high=1.0</em>, <em>size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Solid.ParticleSwarm.uniform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw samples from a uniform distribution.</p>
+<p>Samples are uniformly distributed over the half-open interval
+<code class="docutils literal"><span class="pre">[low,</span> <span class="pre">high)</span></code> (includes low, but excludes high).  In other words,
+any value within the given interval is equally likely to be drawn
+by <cite>uniform</cite>.</p>
+<dl class="docutils">
+<dt>low <span class="classifier-delimiter">:</span> <span class="classifier">float or array_like of floats, optional</span></dt>
+<dd>Lower boundary of the output interval.  All values generated will be
+greater than or equal to low.  The default value is 0.</dd>
+<dt>high <span class="classifier-delimiter">:</span> <span class="classifier">float or array_like of floats</span></dt>
+<dd>Upper boundary of the output interval.  All values generated will be
+less than high.  The default value is 1.0.</dd>
+<dt>size <span class="classifier-delimiter">:</span> <span class="classifier">int or tuple of ints, optional</span></dt>
+<dd>Output shape.  If the given shape is, e.g., <code class="docutils literal"><span class="pre">(m,</span> <span class="pre">n,</span> <span class="pre">k)</span></code>, then
+<code class="docutils literal"><span class="pre">m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code> samples are drawn.  If size is <code class="docutils literal"><span class="pre">None</span></code> (default),
+a single value is returned if <code class="docutils literal"><span class="pre">low</span></code> and <code class="docutils literal"><span class="pre">high</span></code> are both scalars.
+Otherwise, <code class="docutils literal"><span class="pre">np.broadcast(low,</span> <span class="pre">high).size</span></code> samples are drawn.</dd>
+</dl>
+<dl class="docutils">
+<dt>out <span class="classifier-delimiter">:</span> <span class="classifier">ndarray or scalar</span></dt>
+<dd>Drawn samples from the parameterized uniform distribution.</dd>
+</dl>
+<p>randint : Discrete uniform distribution, yielding integers.
+random_integers : Discrete uniform distribution over the closed</p>
+<blockquote>
+<div>interval <code class="docutils literal"><span class="pre">[low,</span> <span class="pre">high]</span></code>.</div></blockquote>
+<p>random_sample : Floats uniformly distributed over <code class="docutils literal"><span class="pre">[0,</span> <span class="pre">1)</span></code>.
+random : Alias for <cite>random_sample</cite>.
+rand : Convenience function that accepts dimensions as input, e.g.,</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">rand(2,2)</span></code> would generate a 2-by-2 array of floats,
+uniformly distributed over <code class="docutils literal"><span class="pre">[0,</span> <span class="pre">1)</span></code>.</div></blockquote>
+<p>The probability density function of the uniform distribution is</p>
+<p>anywhere within the interval <code class="docutils literal"><span class="pre">[a,</span> <span class="pre">b)</span></code>, and zero elsewhere.</p>
+<p>When <code class="docutils literal"><span class="pre">high</span></code> == <code class="docutils literal"><span class="pre">low</span></code>, values of <code class="docutils literal"><span class="pre">low</span></code> will be returned.
+If <code class="docutils literal"><span class="pre">high</span></code> &lt; <code class="docutils literal"><span class="pre">low</span></code>, the results are officially undefined
+and may eventually raise an error, i.e. do not rely on this
+function to behave when passed arguments satisfying that
+inequality condition.</p>
+<p>Draw samples from the distribution:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>All values are within the given interval:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">s</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">s</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Display the histogram of the samples, along with the
+probability density function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">ignored</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">bins</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-Solid.SimulatedAnnealing">
+<span id="solid-simulatedannealing-module"></span><h2>Solid.SimulatedAnnealing module<a class="headerlink" href="#module-Solid.SimulatedAnnealing" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Solid.SimulatedAnnealing.SimulatedAnnealing">
+<em class="property">class </em><code class="descclassname">Solid.SimulatedAnnealing.</code><code class="descname">SimulatedAnnealing</code><span class="sig-paren">(</span><em>initial_state</em>, <em>temp_begin</em>, <em>schedule_constant</em>, <em>max_steps</em>, <em>min_energy=None</em>, <em>schedule=’exponential’</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Solid/SimulatedAnnealing.html#SimulatedAnnealing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Solid.SimulatedAnnealing.SimulatedAnnealing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Conducts simulated annealing algorithm</p>
+<dl class="attribute">
+<dt id="Solid.SimulatedAnnealing.SimulatedAnnealing.adjust_temp">
+<code class="descname">adjust_temp</code><em class="property"> = None</em><a class="headerlink" href="#Solid.SimulatedAnnealing.SimulatedAnnealing.adjust_temp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.SimulatedAnnealing.SimulatedAnnealing.best_energy">
+<code class="descname">best_energy</code><em class="property"> = None</em><a class="headerlink" href="#Solid.SimulatedAnnealing.SimulatedAnnealing.best_energy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.SimulatedAnnealing.SimulatedAnnealing.best_state">
+<code class="descname">best_state</code><em class="property"> = None</em><a class="headerlink" href="#Solid.SimulatedAnnealing.SimulatedAnnealing.best_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.SimulatedAnnealing.SimulatedAnnealing.cur_steps">
+<code class="descname">cur_steps</code><em class="property"> = 0</em><a class="headerlink" href="#Solid.SimulatedAnnealing.SimulatedAnnealing.cur_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.SimulatedAnnealing.SimulatedAnnealing.current_energy">
+<code class="descname">current_energy</code><em class="property"> = None</em><a class="headerlink" href="#Solid.SimulatedAnnealing.SimulatedAnnealing.current_energy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.SimulatedAnnealing.SimulatedAnnealing.current_state">
+<code class="descname">current_state</code><em class="property"> = None</em><a class="headerlink" href="#Solid.SimulatedAnnealing.SimulatedAnnealing.current_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.SimulatedAnnealing.SimulatedAnnealing.current_temp">
+<code class="descname">current_temp</code><em class="property"> = None</em><a class="headerlink" href="#Solid.SimulatedAnnealing.SimulatedAnnealing.current_temp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.SimulatedAnnealing.SimulatedAnnealing.initial_state">
+<code class="descname">initial_state</code><em class="property"> = None</em><a class="headerlink" href="#Solid.SimulatedAnnealing.SimulatedAnnealing.initial_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.SimulatedAnnealing.SimulatedAnnealing.max_steps">
+<code class="descname">max_steps</code><em class="property"> = None</em><a class="headerlink" href="#Solid.SimulatedAnnealing.SimulatedAnnealing.max_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.SimulatedAnnealing.SimulatedAnnealing.min_energy">
+<code class="descname">min_energy</code><em class="property"> = None</em><a class="headerlink" href="#Solid.SimulatedAnnealing.SimulatedAnnealing.min_energy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="Solid.SimulatedAnnealing.SimulatedAnnealing.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>verbose=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Solid/SimulatedAnnealing.html#SimulatedAnnealing.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Solid.SimulatedAnnealing.SimulatedAnnealing.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conducts simulated annealing</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>verbose</strong> – indicates whether or not to print progress regularly</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">best state and best energy</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.SimulatedAnnealing.SimulatedAnnealing.start_temp">
+<code class="descname">start_temp</code><em class="property"> = None</em><a class="headerlink" href="#Solid.SimulatedAnnealing.SimulatedAnnealing.start_temp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="Solid.SimulatedAnnealing.random">
+<code class="descclassname">Solid.SimulatedAnnealing.</code><code class="descname">random</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; x in the interval [0, 1).<a class="headerlink" href="#Solid.SimulatedAnnealing.random" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-Solid.StochasticHillClimb">
+<span id="solid-stochastichillclimb-module"></span><h2>Solid.StochasticHillClimb module<a class="headerlink" href="#module-Solid.StochasticHillClimb" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Solid.StochasticHillClimb.StochasticHillClimb">
+<em class="property">class </em><code class="descclassname">Solid.StochasticHillClimb.</code><code class="descname">StochasticHillClimb</code><span class="sig-paren">(</span><em>initial_state</em>, <em>temp</em>, <em>max_steps</em>, <em>max_objective=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Solid/StochasticHillClimb.html#StochasticHillClimb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Solid.StochasticHillClimb.StochasticHillClimb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Conducts stochastic hill climb</p>
+<dl class="attribute">
+<dt id="Solid.StochasticHillClimb.StochasticHillClimb.best_objective">
+<code class="descname">best_objective</code><em class="property"> = None</em><a class="headerlink" href="#Solid.StochasticHillClimb.StochasticHillClimb.best_objective" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.StochasticHillClimb.StochasticHillClimb.best_state">
+<code class="descname">best_state</code><em class="property"> = None</em><a class="headerlink" href="#Solid.StochasticHillClimb.StochasticHillClimb.best_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.StochasticHillClimb.StochasticHillClimb.cur_steps">
+<code class="descname">cur_steps</code><em class="property"> = 0</em><a class="headerlink" href="#Solid.StochasticHillClimb.StochasticHillClimb.cur_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.StochasticHillClimb.StochasticHillClimb.current_state">
+<code class="descname">current_state</code><em class="property"> = None</em><a class="headerlink" href="#Solid.StochasticHillClimb.StochasticHillClimb.current_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.StochasticHillClimb.StochasticHillClimb.initial_state">
+<code class="descname">initial_state</code><em class="property"> = None</em><a class="headerlink" href="#Solid.StochasticHillClimb.StochasticHillClimb.initial_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.StochasticHillClimb.StochasticHillClimb.max_objective">
+<code class="descname">max_objective</code><em class="property"> = None</em><a class="headerlink" href="#Solid.StochasticHillClimb.StochasticHillClimb.max_objective" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.StochasticHillClimb.StochasticHillClimb.max_steps">
+<code class="descname">max_steps</code><em class="property"> = None</em><a class="headerlink" href="#Solid.StochasticHillClimb.StochasticHillClimb.max_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="Solid.StochasticHillClimb.StochasticHillClimb.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>verbose=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Solid/StochasticHillClimb.html#StochasticHillClimb.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Solid.StochasticHillClimb.StochasticHillClimb.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conducts hill climb</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>verbose</strong> – indicates whether or not to print progress regularly</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">best state and best objective function value</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.StochasticHillClimb.StochasticHillClimb.temp">
+<code class="descname">temp</code><em class="property"> = None</em><a class="headerlink" href="#Solid.StochasticHillClimb.StochasticHillClimb.temp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="Solid.StochasticHillClimb.random">
+<code class="descclassname">Solid.StochasticHillClimb.</code><code class="descname">random</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; x in the interval [0, 1).<a class="headerlink" href="#Solid.StochasticHillClimb.random" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-Solid.TabuSearch">
+<span id="solid-tabusearch-module"></span><h2>Solid.TabuSearch module<a class="headerlink" href="#module-Solid.TabuSearch" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Solid.TabuSearch.TabuSearch">
+<em class="property">class </em><code class="descclassname">Solid.TabuSearch.</code><code class="descname">TabuSearch</code><span class="sig-paren">(</span><em>initial_state</em>, <em>tabu_size</em>, <em>max_steps</em>, <em>max_score=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Solid/TabuSearch.html#TabuSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Solid.TabuSearch.TabuSearch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Conducts tabu search</p>
+<dl class="attribute">
+<dt id="Solid.TabuSearch.TabuSearch.best">
+<code class="descname">best</code><em class="property"> = None</em><a class="headerlink" href="#Solid.TabuSearch.TabuSearch.best" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.TabuSearch.TabuSearch.cur_steps">
+<code class="descname">cur_steps</code><em class="property"> = None</em><a class="headerlink" href="#Solid.TabuSearch.TabuSearch.cur_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.TabuSearch.TabuSearch.current">
+<code class="descname">current</code><em class="property"> = None</em><a class="headerlink" href="#Solid.TabuSearch.TabuSearch.current" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.TabuSearch.TabuSearch.initial_state">
+<code class="descname">initial_state</code><em class="property"> = None</em><a class="headerlink" href="#Solid.TabuSearch.TabuSearch.initial_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.TabuSearch.TabuSearch.max_score">
+<code class="descname">max_score</code><em class="property"> = None</em><a class="headerlink" href="#Solid.TabuSearch.TabuSearch.max_score" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.TabuSearch.TabuSearch.max_steps">
+<code class="descname">max_steps</code><em class="property"> = None</em><a class="headerlink" href="#Solid.TabuSearch.TabuSearch.max_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="Solid.TabuSearch.TabuSearch.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>verbose=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Solid/TabuSearch.html#TabuSearch.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Solid.TabuSearch.TabuSearch.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conducts tabu search</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>verbose</strong> – indicates whether or not to print progress regularly</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">best state and objective function value of best state</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.TabuSearch.TabuSearch.tabu_list">
+<code class="descname">tabu_list</code><em class="property"> = None</em><a class="headerlink" href="#Solid.TabuSearch.TabuSearch.tabu_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Solid.TabuSearch.TabuSearch.tabu_size">
+<code class="descname">tabu_size</code><em class="property"> = None</em><a class="headerlink" href="#Solid.TabuSearch.TabuSearch.tabu_size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="Solid.TabuSearch.random">
+<code class="descclassname">Solid.TabuSearch.</code><code class="descname">random</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; x in the interval [0, 1).<a class="headerlink" href="#Solid.TabuSearch.random" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-Solid">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-Solid" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Solid package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-Solid.EvolutionaryAlgorithm">Solid.EvolutionaryAlgorithm module</a></li>
+<li><a class="reference internal" href="#module-Solid.GeneticAlgorithm">Solid.GeneticAlgorithm module</a></li>
+<li><a class="reference internal" href="#module-Solid.HarmonySearch">Solid.HarmonySearch module</a></li>
+<li><a class="reference internal" href="#module-Solid.ParticleSwarm">Solid.ParticleSwarm module</a></li>
+<li><a class="reference internal" href="#module-Solid.SimulatedAnnealing">Solid.SimulatedAnnealing module</a></li>
+<li><a class="reference internal" href="#module-Solid.StochasticHillClimb">Solid.StochasticHillClimb module</a></li>
+<li><a class="reference internal" href="#module-Solid.TabuSearch">Solid.TabuSearch module</a></li>
+<li><a class="reference internal" href="#module-Solid">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Solid.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Devin Soni.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/Solid.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
