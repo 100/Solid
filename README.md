@@ -7,7 +7,7 @@
 [![Build Status](https://travis-ci.org/100/Solid.svg?branch=master)](https://travis-ci.org/100/Solid)
 [![MIT License](https://img.shields.io/dub/l/vibe-d.svg)](https://github.com/100/Cranium/blob/master/LICENSE)
 
-## *Solid* is a Python library for gradient-free optimization.
+## *Solid* is a Python framework for gradient-free optimization.
 
 #### It contains basic versions of many of the most common [optimization algorithms that do not require the calculation of gradients](https://en.wikipedia.org/wiki/Derivative-free_optimization), and allows for very rapid development using them.
 
