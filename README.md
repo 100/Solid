@@ -13,6 +13,8 @@
 
 #### It's a very versatile library that's great for learning, modifying, and of course, using out-of-the-box.
 
+#### See the detailed documentation [here](https://100.github.io/Solid/).
+
 <hr>
 
 ## Current Features:
