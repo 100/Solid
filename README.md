@@ -41,7 +41,7 @@
 ```python
 from random import choice, randint, random
 from string import lowercase
-from Solid import EvolutionaryAlgorithm
+from Solid.EvolutionaryAlgorithm import EvolutionaryAlgorithm
 
 
 class Algorithm(EvolutionaryAlgorithm):
