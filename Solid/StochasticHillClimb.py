@@ -24,7 +24,7 @@ class StochasticHillClimb:
 
     def __init__(self, initial_state, temp, max_steps, max_objective=None):
         """
-        
+
         :param initial_state: initial state of hill climbing
         :param max_steps: maximum steps to run hill climbing for
         :param temp: temperature in probabilistic acceptance of transition
