@@ -20,7 +20,7 @@ class Algorithm(EvolutionaryAlgorithm):
     def _mutate(self, member):
         if self.mutation_rate >= random():
             member = list(member)
-            member[randint(0,4)] = choice(ascii_lowercase)
+            member[randint(0, 4)] = choice(ascii_lowercase)
             member = ''.join(member)
         return member
 
