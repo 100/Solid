@@ -109,14 +109,14 @@ class TabuSearch:
             self.cur_steps += 1
 
             if ((i + 1) % 100 == 0) and verbose:
-                print self
+                print(self)
 
             neighborhood = self._neighborhood()
             neighborhood_best = self._best(neighborhood)
 
             while True:
                 if all([x in self.tabu_list for x in neighborhood]):
-                    print "TERMINATING - NO SUITABLE NEIGHBORS"
+                    print("TERMINATING - NO SUITABLE NEIGHBORS")
                     return self.best, self._score(self.best)
                 if neighborhood_best in self.tabu_list:
                     if self._score(neighborhood_best) > self._score(self.best):
@@ -134,7 +134,7 @@ class TabuSearch:
                     break
 
             if self.max_score is not None and self._score(self.best) > self.max_score:
-                print "TERMINATING - REACHED MAXIMUM SCORE"
+                print("TERMINATING - REACHED MAXIMUM SCORE")
                 return self.best, self._score(self.best)
-        print "TERMINATING - REACHED MAXIMUM STEPS"
+        print("TERMINATING - REACHED MAXIMUM STEPS")
         return self.best, self._score(self.best)
