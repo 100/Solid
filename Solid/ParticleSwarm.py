@@ -65,7 +65,8 @@ class ParticleSwarm:
 
         self.pos = uniform(self.lower_bound, self.upper_bound, size=(swarm_size, member_size))
 
-        self.vel = uniform(self.lower_bound - self.upper_bound, self.upper_bound - self.lower_bound, size=(swarm_size, member_size))
+        self.vel = uniform(self.lower_bound - self.upper_bound, self.upper_bound - self.lower_bound,
+                           size=(swarm_size, member_size))
 
         self.best = copy(self.pos)
 
@@ -104,7 +105,8 @@ class ParticleSwarm:
         :return: None
         """
         self.pos = uniform(self.lower_bound, self.upper_bound, size=(self.swarm_size, self.member_size))
-        self.vel = uniform(self.lower_bound - self.upper_bound, self.upper_bound - self.lower_bound, size=(self.swarm_size, self.member_size))
+        self.vel = uniform(self.lower_bound - self.upper_bound, self.upper_bound - self.lower_bound,
+                           size=(self.swarm_size, self.member_size))
         self.scores = self._score(self.pos)
         self.best = copy(self.pos)
         self.cur_steps = 0
@@ -155,7 +157,7 @@ class ParticleSwarm:
         :return: None
         """
         if self.global_best is None or min(self.scores) < self._objective(self.global_best[0]):
-            self.global_best = array([self.pos[argmin(self.scores)],] * self.swarm_size)
+            self.global_best = array([self.pos[argmin(self.scores)]] * self.swarm_size)
 
     def run(self, verbose=True):
         """
