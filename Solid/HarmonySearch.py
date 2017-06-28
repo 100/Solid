@@ -161,7 +161,7 @@ class HarmonySearch:
             self.best = self.memory[self._best_score()]
 
             if self.max_score is not None and self._score(self.best) > self.max_score:
-                print("TERMINATING - REACHED MAXIMUM SCORE"
+                print("TERMINATING - REACHED MAXIMUM SCORE")
                 return self.best, self._score(self.best)
         print("TERMINATING - REACHED MAXIMUM STEPS")
         return self.best, self._score(self.best)
