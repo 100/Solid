@@ -114,7 +114,7 @@ class StochasticHillClimb:
             self.cur_steps += 1
 
             if ((i + 1) % 100 == 0) and verbose:
-                print self
+                print(self)
 
             neighbor = self._neighbor()
 
@@ -126,7 +126,7 @@ class StochasticHillClimb:
                 self.best_state = deepcopy(self.current_state)
 
             if self.max_objective is not None and self.best_objective > self.max_objective:
-                print "TERMINATING - REACHED MAXIMUM OBJECTIVE"
+                print("TERMINATING - REACHED MAXIMUM OBJECTIVE")
                 return self.best_state, self.best_objective
-        print "TERMINATING - REACHED MAXIMUM STEPS"
+        print("TERMINATING - REACHED MAXIMUM STEPS")
         return self.best_state, self.best_objective
