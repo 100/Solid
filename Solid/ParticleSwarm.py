@@ -169,7 +169,7 @@ class ParticleSwarm:
             self.cur_steps += 1
 
             if ((i + 1) % 100 == 0) and verbose:
-                print self
+                print(self)
 
             u1 = zeros((self.swarm_size, self.swarm_size))
             u1[diag_indices_from(u1)] = [random() for x in range(self.swarm_size)]
@@ -188,7 +188,7 @@ class ParticleSwarm:
             self._global_best()
 
             if self._objective(self.global_best[0]) < self.min_objective:
-                print "TERMINATING - REACHED MINIMUM OBJECTIVE"
+                print("TERMINATING - REACHED MINIMUM OBJECTIVE")
                 return self.global_best[0], self._objective(self.global_best[0])
-        print "TERMINATING - REACHED MAXIMUM STEPS"
+        print("TERMINATING - REACHED MAXIMUM STEPS")
         return self.global_best[0], self._objective(self.global_best[0])
