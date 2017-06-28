@@ -1,8 +1,8 @@
 from abc import ABCMeta, abstractmethod
 from copy import deepcopy
-from random import randint, random, shuffle
 from collections import deque
 from numpy import argmax
+
 
 class TabuSearch:
     """
