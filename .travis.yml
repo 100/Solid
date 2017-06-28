@@ -7,7 +7,8 @@ python:
   - "nightly"  # currently points to 3.7-dev
 before_install:
   - pip install flake8
-  - flake8 . --exit-zero --select=E901,E999
+  # exit-zero treates all errors as warnings.  The GitHub editor is 127 chars wide
+  - flake8 . --count --exit-zero --max-line-length=127 --statistics
 install:
   - pip install numpy
 script: py.test -s
