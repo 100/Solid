@@ -184,7 +184,7 @@ class EvolutionaryAlgorithm:
             self.cur_steps += 1
 
             if ((i + 1) % 100 == 0) and verbose:
-                print self
+                print(self)
 
             self.population = self._select_n(num_copy)
             self._populate_fitness()
@@ -202,7 +202,7 @@ class EvolutionaryAlgorithm:
                 self.best_member = deepcopy(best_member)
 
             if self.max_fitness is not None and self.best_fitness >= self.max_fitness:
-                print "TERMINATING - REACHED MAXIMUM FITNESS"
+                print("TERMINATING - REACHED MAXIMUM FITNESS")
                 return self.best_member, self.best_fitness
-        print "TERMINATING - REACHED MAXIMUM STEPS"
+        print("TERMINATING - REACHED MAXIMUM STEPS")
         return self.best_member, self.best_fitness
