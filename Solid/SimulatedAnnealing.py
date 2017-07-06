@@ -143,7 +143,7 @@ class SimulatedAnnealing:
         for i in range(self.max_steps):
             self.cur_steps += 1
 
-            if ((i + 1) % 100 == 0) and verbose:
+            if verbose and ((i + 1) % 100 == 0):
                 print(self)
 
             neighbor = self._neighbor()
