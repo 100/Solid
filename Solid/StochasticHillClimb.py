@@ -121,11 +121,11 @@ class StochasticHillClimb:
             if self._accept_neighbor(neighbor):
                 self.current_state = neighbor
 
-            if self._objective(self.current_state) > self.best_objective:
+            if self.best_objective is None or self._objective(self.current_state) > self.best_objective:
                 self.best_objective = self._objective(self.current_state)
                 self.best_state = deepcopy(self.current_state)
 
-            if self.max_objective is not None and self.best_objective > self.max_objective:
+            if self.best_objective is not None and self.max_objective is not None and self.best_objective > self.max_objective:
                 print("TERMINATING - REACHED MAXIMUM OBJECTIVE")
                 return self.best_state, self.best_objective
         print("TERMINATING - REACHED MAXIMUM STEPS")

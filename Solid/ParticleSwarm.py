@@ -189,7 +189,7 @@ class ParticleSwarm:
             self.scores = self._score(self.pos)
             self._global_best()
 
-            if self._objective(self.global_best[0]) < self.min_objective:
+            if self.min_objective is not None and self._objective(self.global_best[0]) < self.min_objective:
                 print("TERMINATING - REACHED MINIMUM OBJECTIVE")
                 return self.global_best[0], self._objective(self.global_best[0])
         print("TERMINATING - REACHED MAXIMUM STEPS")
