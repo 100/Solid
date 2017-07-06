@@ -109,7 +109,7 @@ class HarmonySearch:
 
         :return: None
         """
-        self.scores = list([self._score(x) for x in self.memory])
+        self.scores = [self._score(x) for x in self.memory]
 
     def _worst_score(self):
         """
@@ -139,7 +139,7 @@ class HarmonySearch:
         for i in range(self.max_steps):
             self.cur_steps += 1
 
-            if ((i + 1) % 100 == 0) and verbose:
+            if verbose and ((i + 1) % 100 == 0):
                 print(self)
 
             self._score_all()
