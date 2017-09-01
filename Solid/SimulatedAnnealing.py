@@ -143,8 +143,8 @@ class SimulatedAnnealing:
         for i in range(self.max_steps):
             self.cur_steps += 1
 
-            if ((i + 1) % 100 == 0) and verbose:
-                print self
+            if verbose and ((i + 1) % 100 == 0):
+                print(self)
 
             neighbor = self._neighbor()
 
@@ -157,12 +157,12 @@ class SimulatedAnnealing:
                 self.best_state = deepcopy(self.current_state)
 
             if self.min_energy is not None and self.current_energy < self.min_energy:
-                print "TERMINATING - REACHED MINIMUM ENERGY"
+                print("TERMINATING - REACHED MINIMUM ENERGY")
                 return self.best_state, self.best_energy
 
             self.adjust_temp()
             if self.current_temp < 0.000001:
-                print "TERMINATING - REACHED TEMPERATURE OF 0"
+                print("TERMINATING - REACHED TEMPERATURE OF 0")
                 return self.best_state, self.best_energy
-        print "TERMINATING - REACHED MAXIMUM STEPS"
+        print("TERMINATING - REACHED MAXIMUM STEPS")
         return self.best_state, self.best_energy

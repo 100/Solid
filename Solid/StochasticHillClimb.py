@@ -24,7 +24,7 @@ class StochasticHillClimb:
 
     def __init__(self, initial_state, temp, max_steps, max_objective=None):
         """
-        
+
         :param initial_state: initial state of hill climbing
         :param max_steps: maximum steps to run hill climbing for
         :param temp: temperature in probabilistic acceptance of transition
@@ -114,19 +114,19 @@ class StochasticHillClimb:
             self.cur_steps += 1
 
             if ((i + 1) % 100 == 0) and verbose:
-                print self
+                print(self)
 
             neighbor = self._neighbor()
 
             if self._accept_neighbor(neighbor):
                 self.current_state = neighbor
 
-            if self._objective(self.current_state) > self.best_objective:
+            if self._objective(self.current_state) > (self.best_objective or 0):
                 self.best_objective = self._objective(self.current_state)
                 self.best_state = deepcopy(self.current_state)
 
-            if self.max_objective is not None and self.best_objective > self.max_objective:
-                print "TERMINATING - REACHED MAXIMUM OBJECTIVE"
+            if self.max_objective is not None and (self.best_objective or 0) > self.max_objective:
+                print("TERMINATING - REACHED MAXIMUM OBJECTIVE")
                 return self.best_state, self.best_objective
-        print "TERMINATING - REACHED MAXIMUM STEPS"
+        print("TERMINATING - REACHED MAXIMUM STEPS")
         return self.best_state, self.best_objective

@@ -1,5 +1,5 @@
 from random import choice, randint, random
-from string import lowercase
+from string import ascii_lowercase
 from Solid.TabuSearch import TabuSearch
 from copy import deepcopy
 
@@ -13,7 +13,7 @@ class Algorithm(TabuSearch):
         neighborhood = []
         for _ in range(10):
             neighbor = deepcopy(member)
-            neighbor[randint(0,4)] = choice(lowercase)
+            neighbor[randint(0, 4)] = choice(ascii_lowercase)
             neighbor = ''.join(neighbor)
             neighborhood.append(neighbor)
         return neighborhood

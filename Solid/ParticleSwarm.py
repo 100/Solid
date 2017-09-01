@@ -65,7 +65,8 @@ class ParticleSwarm:
 
         self.pos = uniform(self.lower_bound, self.upper_bound, size=(swarm_size, member_size))
 
-        self.vel = uniform(self.lower_bound - self.upper_bound, self.upper_bound - self.lower_bound, size=(swarm_size, member_size))
+        self.vel = uniform(self.lower_bound - self.upper_bound, self.upper_bound - self.lower_bound,
+                           size=(swarm_size, member_size))
 
         self.best = copy(self.pos)
 
@@ -104,7 +105,8 @@ class ParticleSwarm:
         :return: None
         """
         self.pos = uniform(self.lower_bound, self.upper_bound, size=(self.swarm_size, self.member_size))
-        self.vel = uniform(self.lower_bound - self.upper_bound, self.upper_bound - self.lower_bound, size=(self.swarm_size, self.member_size))
+        self.vel = uniform(self.lower_bound - self.upper_bound, self.upper_bound - self.lower_bound,
+                           size=(self.swarm_size, self.member_size))
         self.scores = self._score(self.pos)
         self.best = copy(self.pos)
         self.cur_steps = 0
@@ -155,7 +157,7 @@ class ParticleSwarm:
         :return: None
         """
         if self.global_best is None or min(self.scores) < self._objective(self.global_best[0]):
-            self.global_best = array([self.pos[argmin(self.scores)],] * self.swarm_size)
+            self.global_best = array([self.pos[argmin(self.scores)]] * self.swarm_size)
 
     def run(self, verbose=True):
         """
@@ -168,8 +170,8 @@ class ParticleSwarm:
         for i in range(self.max_steps):
             self.cur_steps += 1
 
-            if ((i + 1) % 100 == 0) and verbose:
-                print self
+            if verbose and ((i + 1) % 100 == 0):
+                print(self)
 
             u1 = zeros((self.swarm_size, self.swarm_size))
             u1[diag_indices_from(u1)] = [random() for x in range(self.swarm_size)]
@@ -187,8 +189,8 @@ class ParticleSwarm:
             self.scores = self._score(self.pos)
             self._global_best()
 
-            if self._objective(self.global_best[0]) < self.min_objective:
-                print "TERMINATING - REACHED MINIMUM OBJECTIVE"
+            if self._objective(self.global_best[0]) < (self.min_objective or 0):
+                print("TERMINATING - REACHED MINIMUM OBJECTIVE")
                 return self.global_best[0], self._objective(self.global_best[0])
-        print "TERMINATING - REACHED MAXIMUM STEPS"
+        print("TERMINATING - REACHED MAXIMUM STEPS")
         return self.global_best[0], self._objective(self.global_best[0])

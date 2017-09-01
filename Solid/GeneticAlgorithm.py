@@ -32,7 +32,7 @@ class GeneticAlgorithm:
         :param max_fitness: fitness value to stop algorithm once reached
         """
         if isinstance(crossover_rate, float):
-            if crossover_rate >= 0 and crossover_rate <= 1:
+            if 0 <= crossover_rate <= 1:
                 self.crossover_rate = crossover_rate
             else:
                 raise ValueError('Crossover rate must be a float between 0 and 1')
@@ -40,7 +40,7 @@ class GeneticAlgorithm:
             raise ValueError('Crossover rate must be a float between 0 and 1')
 
         if isinstance(mutation_rate, float):
-            if mutation_rate >= 0 and mutation_rate <= 1:
+            if 0 <= mutation_rate <= 1:
                 self.mutation_rate = mutation_rate
             else:
                 raise ValueError('Mutation rate must be a float between 0 and 1')
@@ -186,8 +186,8 @@ class GeneticAlgorithm:
         for i in range(self.max_steps):
             self.cur_steps += 1
 
-            if ((i + 1) % 100 == 0) and verbose:
-                print self
+            if verbose and ((i + 1) % 100 == 0):
+                print(self)
 
             self.population = self._select_n(num_copy)
             self._populate_fitness()
@@ -205,7 +205,7 @@ class GeneticAlgorithm:
                 self.best_member = deepcopy(best_member)
 
             if self.max_fitness is not None and self.best_fitness >= self.max_fitness:
-                print "TERMINATING - REACHED MAXIMUM FITNESS"
+                print("TERMINATING - REACHED MAXIMUM FITNESS")
                 return self.best_member, self.best_fitness
-        print "TERMINATING - REACHED MAXIMUM STEPS"
+        print("TERMINATING - REACHED MAXIMUM STEPS")
         return self.best_member, self.best_fitness
